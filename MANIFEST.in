@@ -1,0 +1,6 @@
+include README AUTHORS LICENSE
+
+graft beehive/hives/templates
+graft tests
+
+global-exclude *.py[co]
