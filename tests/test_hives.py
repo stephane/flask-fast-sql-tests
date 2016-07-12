@@ -2,7 +2,7 @@ from flask import url_for
 
 from beehive.database import db
 from beehive.hives import models as hives_models
-
+from beehive.hives import factories as hives_factories
 
 def test_hive_instance(session):
     hive = hives_models.Hive(name='H1')
@@ -10,6 +10,11 @@ def test_hive_instance(session):
     db.session.commit()
     assert hives_models.Hive.query.count() == 1
     assert hive.name == 'H1'
+
+def test_hive_factory(session):
+    hive = hives_factories.HiveFactory()
+    db.session.add(hive)
+    assert hives_models.Hive.query.count() == 1
 
 def test_hive_list(session, client):
     hive1 = hives_models.Hive(name='H1')
