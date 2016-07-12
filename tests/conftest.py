@@ -38,8 +38,10 @@ def db(app, request):
 def session(db, request):
     """Creates a new database session for a test."""
     db.session.begin_nested()
+    db.session.begin_nested()
 
     def teardown():
+        db.session.rollback()
         db.session.rollback()
         db.session.close()
 
