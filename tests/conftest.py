@@ -34,16 +34,29 @@ def db(app, request):
     request.addfinalizer(teardown)
     return _db
 
-@pytest.fixture(scope='function')
-def session(db, request):
-    """Creates a new database session for a test."""
-    db.session.begin_nested()
-    db.session.begin_nested()
+@pytest.fixture(scope='session')
+def connection(db, request):
+    print("* CONNECTION")
+    connection = db.engine.connect()
 
     def teardown():
+        print("* CONNECTION CLOSE")
+        connection.close()
+
+    request.addfinalizer(teardown)
+    return connection
+
+@pytest.fixture(scope='function')
+def session(db, connection, request):
+    """Creates a new database session for a test."""
+    options = dict(bind=connection, binds=None)
+    db.session = db.create_scoped_session(options=options)
+    print("** BEGIN")
+    db.session.begin(subtransactions=True)
+
+    def teardown():
+        print("** ROLLBACK")
         db.session.rollback()
-        db.session.rollback()
-        db.session.close()
 
     request.addfinalizer(teardown)
     return db.session
