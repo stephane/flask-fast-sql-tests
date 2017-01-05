@@ -1,6 +1,7 @@
-include README AUTHORS LICENSE
+include README.md AUTHORS LICENSE
 
 graft beehive/templates
 graft tests
 
 global-exclude *.py[co]
+global-exclude __pycache__/*

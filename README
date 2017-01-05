@@ -1,6 +1,0 @@
-export FLASK_APP=app
-flask run
-
-python setup.py test
-or
-py.test -s
