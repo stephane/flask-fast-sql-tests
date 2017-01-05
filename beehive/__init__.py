@@ -3,7 +3,7 @@ import click
 from flask import Flask
 
 def create_app(config_object):
-    app = Flask(__name__, instance_relative_config=True)
+    app = Flask(__name__, instance_relative_config=False)
     app.config.from_object(config_object)
 
     register_extensions(app)
@@ -19,8 +19,8 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    from beehive.hives.views import hives
-    app.register_blueprint(hives, url_prefix='/hives')
+    from .views import beehive
+    app.register_blueprint(beehive, url_prefix='/')
 
 
 def register_cli(app):

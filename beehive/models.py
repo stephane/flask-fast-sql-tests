@@ -1,14 +1,15 @@
 from sqlalchemy import func
 
-from ..database import db
+from .database import db
 
 
 class Hive(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, unique=True, nullable=False)
 
+
 class Bee(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
     birthdate = db.Column(db.DateTime(timezone=True), default=func.now())
     hive_id = db.Column(db.Integer, db.ForeignKey('hive.id'))

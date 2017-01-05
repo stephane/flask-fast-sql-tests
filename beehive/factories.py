@@ -1,6 +1,6 @@
 import factory
 
-from . import models as hives_models
+from . import models as beehive_models
 
 class CustomSQLAlchemyModelFactory(factory.alchemy.SQLAlchemyModelFactory):
     @classmethod
@@ -9,6 +9,6 @@ class CustomSQLAlchemyModelFactory(factory.alchemy.SQLAlchemyModelFactory):
 
 class HiveFactory(CustomSQLAlchemyModelFactory):
     class Meta:
-        model = hives_models.Hive
+        model = beehive_models.Hive
 
     name = factory.Sequence(lambda n: "H%d" % n)

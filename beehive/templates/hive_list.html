@@ -1,0 +1,9 @@
+<html>
+  <ul>
+    {% for hive in hives %}
+      <li>{{ hive.name }}</li>
+    {% else %}
+      <li>No hives in your database.</li>
+    {% endfor %}
+  </ul>
+</html>
