@@ -12,16 +12,13 @@ def create_app(config_object):
 
     return app
 
-
 def register_extensions(app):
     from .database import db
     db.init_app(app)
 
-
 def register_blueprints(app):
     from .views import beehive
     app.register_blueprint(beehive, url_prefix='/')
-
 
 def register_cli(app):
     @app.cli.command(short_help="Initialize the database")
