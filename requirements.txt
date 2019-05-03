@@ -1,4 +1,0 @@
-Flask==0.12
-SQLAlchemy==1.1.4
-Flask-SQLAlchemy==2.1
-psycopg2
